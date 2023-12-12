@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_arg_c.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 15:17:07 by agheredi          #+#    #+#             */
-/*   Updated: 2023/10/04 11:02:53 by agheredi         ###   ########.fr       */
+/*   Created: 2023/06/01 10:58:59 by agheredi          #+#    #+#             */
+/*   Updated: 2023/09/15 11:49:40 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	pf_arg_c(t_sc *sc)
 {
-	char	*nwstr;
-	size_t	j;
-	size_t	i;
+	char	ch;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	nwstr = (char *) malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!nwstr)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+	ch = va_arg(sc->arg, int);
+	if (write(1, &ch, 1) == -1)
 	{
-		nwstr[i] = s1[i];
-		i++;
+		sc->error = -1;
+		return (-1);
 	}
-	j = 0;
-	while (s2[j] != '\0')
-	{
-		nwstr[i + j] = s2[j];
-		j++;
-	}
-	nwstr[i + j] = '\0';
-	return (nwstr);
+	sc -> len += 1;
+	return (1);
 }

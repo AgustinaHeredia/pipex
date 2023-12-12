@@ -1,40 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/11 15:17:07 by agheredi          #+#    #+#             */
-/*   Updated: 2023/10/04 11:02:53 by agheredi         ###   ########.fr       */
+/*   Created: 2023/12/12 14:42:03 by agheredi          #+#    #+#             */
+/*   Updated: 2023/12/12 15:50:00 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	free_array(char **tab_str)
 {
-	char	*nwstr;
-	size_t	j;
-	size_t	i;
+	int	i;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	nwstr = (char *) malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!nwstr)
-		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	while (tab_str[i])
 	{
-		nwstr[i] = s1[i];
+		free(tab_str[i]);
 		i++;
 	}
-	j = 0;
-	while (s2[j] != '\0')
-	{
-		nwstr[i + j] = s2[j];
-		j++;
-	}
-	nwstr[i + j] = '\0';
-	return (nwstr);
+	free(tab_str);
+}
+
+void	exit_handler(int n_exit)
+{
+	if (n_exit == 1)
+		ft_putstr_fd("Error al ejecutar el programa\n", 2);
+	exit(0);
+}
+
+void	exit_handler_free(int n_exit, char **tab_str, char **tab_str2)
+{
+	if (n_exit == 1)
+		ft_putstr_fd("Error al ejecutar el programa\n", 2);
+	free_array(tab_str);
+	free_array(tab_str2);
+	exit(0);
 }

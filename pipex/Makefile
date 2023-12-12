@@ -6,24 +6,27 @@
 #    By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/06 14:39:27 by agheredi          #+#    #+#              #
-#    Updated: 2023/11/27 16:05:06 by agheredi         ###   ########.fr        #
+#    Updated: 2023/12/12 14:50:19 by agheredi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 FLAGS = -Wall -Werror -Wextra -g #-fsanitize='address,undefined'
 SRC = main.c \
+	pipex_utils.c \
 
 
 CC = gcc
 LIBFT_PATH = libft/
 LIBFT_LIB = $(LIBFT_PATH)libft.a
-OBJECTS = $(SRC:.c=.o)
+OBJ_DIR = obj
+OBJECTS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 HEADER = pipex.h
 
 all: subsystems $(NAME)
 
-%.o: %.c $(HEADER) Makefile
+$(OBJ_DIR)/%.o: %.c $(HEADER) Makefile
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c -o $@ $<
 
 subsystems:
@@ -34,7 +37,7 @@ $(NAME): $(OBJECTS)
 
 clean:
 	make -C $(LIBFT_PATH) clean
-	rm -f $(OBJECTS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	make -C $(LIBFT_PATH) fclean

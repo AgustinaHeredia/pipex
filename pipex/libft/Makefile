@@ -6,7 +6,7 @@
 #    By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 10:23:30 by agheredi          #+#    #+#              #
-#    Updated: 2023/10/13 12:46:00 by agheredi         ###   ########.fr        #
+#    Updated: 2023/09/15 12:28:35 by agheredi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,43 +50,41 @@ SRCS = ft_atoi.c \
 	   ft_substr.c \
 	   ft_tolower.c \
 	   ft_toupper.c \
-
-SRCS_BONUS = ft_lstnew_bonus.c \
-			ft_lstadd_front_bonus.c \
-			ft_lstsize_bonus.c \
-			ft_lstlast_bonus.c \
-			ft_lstadd_back_bonus.c \
-			ft_lstdelone_bonus.c \
-			ft_lstclear_bonus.c \
-			ft_lstiter_bonus.c \
-			ft_lstmap_bonus.c \
+	   get_next_line.c \
+	   get_next_line_utils.c \
+	   ft_printf.c \
+	   pf_read_text.c \
+	   pf_search_arg.c \
+	   pf_arg_c.c \
+	   pf_arg_d.c \
+	   pf_arg_p.c \
+	   pf_arg_s.c \
+	   pf_arg_u.c \
+	   pf_arg_x.c \
+	   pf_nbrlen.c \
+	   pf_putchar.c \
+	   pf_putnbr.c \
+	   pf_strlen.c \
+	   pf_putstr.c \
 
 OBJS = $(SRCS:.c=.o)
 
 HEADER = libft.h
 
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
-
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(HEADER)
-	ar -rcs $(NAME) $(OBJS)
+	@ar -rcs $(NAME) $(OBJS)
 	
 %.o : %.c $(HEADER)
-	$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@
 
 clean : 
-	rm -rf $(OBJS) $(OBJS_BONUS)
+	@rm -rf $(OBJS)
 
 fclean : clean 
-	rm -rf $(NAME) .bonus
+	@rm -rf $(NAME) 
 
 re : fclean all
 
-bonus: .bonus
-
-.bonus : $(OBJS) $(HEADER) $(OBJS_BONUS)
-	ar -rcs $(NAME) $(OBJS) $(OBJS_BONUS)
-	@touch .bonus
-
-.PHONY : re clean fclean all bonus
+.PHONY : re clean fclean all

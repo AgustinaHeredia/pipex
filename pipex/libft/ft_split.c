@@ -6,7 +6,7 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 12:49:12 by agheredi          #+#    #+#             */
-/*   Updated: 2023/10/25 11:26:42 by agheredi         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:04:10 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ static char	**ft_write_split(char **lstword, char const *s, char sep)
 	size_t			lenword;
 	unsigned int	i;
 
-	i = 1;
+	i = 0;
 	words = ft_wordcount((char *) s, sep);
-	lstword[0] = ft_calloc(1, 1);
-	while (i <= words)
+	while (i < words)
 	{
 		while (*s && *s == sep)
 			s++;
@@ -82,7 +81,7 @@ char	**ft_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	words = ft_wordcount((char *) s, c);
-	lstwords = (char **) malloc(sizeof(char *) * (words + 2));
+	lstwords = (char **) malloc(sizeof(char *) * (words + 1));
 	if (!lstwords)
 		return (NULL);
 	lstwords = ft_write_split(lstwords, s, c);
