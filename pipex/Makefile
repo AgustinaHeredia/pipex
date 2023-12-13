@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+         #
+#    By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/06 14:39:27 by agheredi          #+#    #+#              #
-#    Updated: 2023/12/12 14:50:19 by agheredi         ###   ########.fr        #
+#    Updated: 2023/12/12 21:54:06 by agusheredia      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = pipex
 FLAGS = -Wall -Werror -Wextra -g #-fsanitize='address,undefined'
 SRC = main.c \
 	pipex_utils.c \
+	exit.c \
 
 
 CC = gcc

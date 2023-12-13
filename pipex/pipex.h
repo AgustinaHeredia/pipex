@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:11:57 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/12 17:35:08 by agheredi         ###   ########.fr       */
+/*   Updated: 2023/12/13 00:41:13 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,28 @@
 
 # include "./libft/libft.h"
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_pipex
 {
-	char	*file_1;
 	char	**comand_1;
 	char	**comand_2;
-	char	*file_2;
 	char	**all_path;
-	int		fd1;
-	int		fd2;
+	int		infile;
+	int		outfile;
 	pid_t	pid;
 }	t_pipex;
 
-void	ft_init_pipex(t_pipex pipex, char **argv);
-void	ft_open_files(t_pipex pipex);
-void	ft_parse_cmds(t_pipex pipex, char *envp);
-
 //pipex_utils.c
-void	free_array(char **tab_str);
-void	exit_handler(int n_exit);
-void	exit_handler_free(int n_exit, char **tab_str, char **tab_str2);
+void	ft_open_files(t_pipex pipex, char **argv);
+void	ft_parse_argvs(t_pipex pipex, char **argv);
+void	ft_parse_cmds(t_pipex pipex, char **envp);
+
+//pipe.c
+void	ft_exec(t_pipex pipex, char **cmd, char **env);
+void	ft_parent_child(t_pipex pipex, char **env);
+
+//exit.c
+void	free_tab(char **tab_str);
 
 #endif

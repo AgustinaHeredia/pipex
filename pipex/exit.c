@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 16:14:21 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/13 00:27:27 by agusheredia      ###   ########.fr       */
+/*   Created: 2023/12/12 21:53:27 by agusheredia       #+#    #+#             */
+/*   Updated: 2023/12/13 00:40:45 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char *envp)
+void	free_tab(char **tab_str)
 {
-	t_pipex	pipex;
+	int	i;
 
-	if (argc != 5)
+	i = 0;
+	while (tab_str[i])
 	{
-		ft_putstr_fd("Error. El numero de argumentos no es válido.\n", 0);
-		return (0);
+		free(tab_str[i]);
+		i++;
 	}
-	ft_open_files(pipex, argv);
-	ft_parse_cmds(pipex, envp);
-	ft_parse_args(pipex, argv);
-	ft_parent_child(pipex, envp);
-	return (0);
+	free(tab_str);
 }
