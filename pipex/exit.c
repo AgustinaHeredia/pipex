@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
+/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 21:53:27 by agusheredia       #+#    #+#             */
-/*   Updated: 2023/12/13 00:40:45 by agusheredia      ###   ########.fr       */
+/*   Created: 2023/12/13 11:07:18 by agheredi          #+#    #+#             */
+/*   Updated: 2023/12/13 12:55:53 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,11 @@ void	free_tab(char **tab_str)
 		i++;
 	}
 	free(tab_str);
+}
+
+void	ft_cleanup(t_pipex pipex)
+{
+	free_tab(pipex.all_path);
+	free_tab(pipex.comand_1);
+	free_tab(pipex.comand_2);
 }

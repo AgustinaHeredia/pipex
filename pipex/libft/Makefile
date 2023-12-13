@@ -6,7 +6,7 @@
 #    By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 10:23:30 by agheredi          #+#    #+#              #
-#    Updated: 2023/09/15 12:28:35 by agheredi         ###   ########.fr        #
+#    Updated: 2023/12/13 13:10:09 by agheredi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,20 +67,24 @@ SRCS = ft_atoi.c \
 	   pf_strlen.c \
 	   pf_putstr.c \
 
-OBJS = $(SRCS:.c=.o)
+OBJ_DIR = obj
+OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(notdir $(SRCS)))
 
 HEADER = libft.h
 
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(HEADER)
+$(NAME) : $(OBJS) | $(OBJ_DIR)
 	@ar -rcs $(NAME) $(OBJS)
 	
-%.o : %.c $(HEADER)
+$(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@
 
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+	
 clean : 
-	@rm -rf $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean : clean 
 	@rm -rf $(NAME) 
