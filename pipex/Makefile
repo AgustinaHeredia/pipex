@@ -6,12 +6,12 @@
 #    By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/06 14:39:27 by agheredi          #+#    #+#              #
-#    Updated: 2023/12/13 17:25:44 by agheredi         ###   ########.fr        #
+#    Updated: 2023/12/14 14:29:33 by agheredi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-FLAGS = -Wall -Werror -Wextra -g -fsanitize='address,undefined'
+FLAGS = -Wall -Werror -Wextra -g #-fsanitize='address,undefined'
 SRC = main.c \
 	pipex_utils.c \
 	exit.c \
