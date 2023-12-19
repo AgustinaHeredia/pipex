@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:11:57 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/14 16:20:59 by agheredi         ###   ########.fr       */
+/*   Updated: 2023/12/18 23:57:27 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,22 @@
 
 # include "./libft/libft.h"
 # include <stdio.h>
-# include <stdlib.h>
 # include <unistd.h>
+# include <stdlib.h>
 # include <fcntl.h>
-# include <string.h>
 # include <errno.h>
-
-# define NOFILE 404
-# define NOREAD 403
-# define NOWRITE 402
-# define NOEXECUTE 126
-# define NOCOMMAND 127
+# include <string.h>
+# include <sys/wait.h>
 
 typedef struct s_pipex
 {
-	char	**comand_1;
-	char	**comand_2;
+	pid_t	pid1;
+	pid_t	pid2;
+	char	**cmd_1;
+	char	**cmd_2;
 	char	**all_path;
-	char	*fd1_name;
-	char	*fd2_name;
-	int		fd1;
-	int		fd2;
+	int		infile;
+	int		outfile;
 }	t_pipex;
 
 
@@ -45,14 +40,14 @@ char	*get_path(t_pipex pipex, char **cmd);
 
 //pipe.c
 void	ft_exec(t_pipex pipex, char **cmd, char **env);
-void	ft_child1(t_pipex pipex, int *p_fd);
-void	ft_child2(t_pipex pipex, int *p_fd);
-void	ft_pipex(t_pipex pipex);
+void	ft_child1(t_pipex pipex, int *p_fd, char **env);
+void	ft_child2(t_pipex pipex, int *p_fd, char **env);
+void	ft_pipex(t_pipex pipex, char **env);
 
 //exit.c
 void	free_tab(char **tab_str);
-void	ft_error_file(int code, char *str);
-void	ft_error(int code, char *str);
+void	ft_error_sms(char *str);
+void	ft_error(char *str);
 void	ft_cleanup(t_pipex *pipex);
 
 #endif
