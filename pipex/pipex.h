@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
+/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:11:57 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/18 23:57:27 by agusheredia      ###   ########.fr       */
+/*   Updated: 2023/12/19 15:33:25 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # include <string.h>
 # include <sys/wait.h>
 
+# define NOFILE 404
+# define NOREAD 403
+# define NOWRITE 402
+
 typedef struct s_pipex
 {
 	pid_t	pid1;
@@ -31,15 +35,16 @@ typedef struct s_pipex
 	char	**all_path;
 	int		infile;
 	int		outfile;
+	char	*name1;
+	char	*name2;
 }	t_pipex;
-
 
 //pipex_utils.c
 char	**ft_parse_cmds(char **envp);
 char	*get_path(t_pipex pipex, char **cmd);
+int		check_file_perimissions(char *fd_name);
 
 //pipe.c
-void	ft_exec(t_pipex pipex, char **cmd, char **env);
 void	ft_child1(t_pipex pipex, int *p_fd, char **env);
 void	ft_child2(t_pipex pipex, int *p_fd, char **env);
 void	ft_pipex(t_pipex pipex, char **env);
@@ -47,7 +52,7 @@ void	ft_pipex(t_pipex pipex, char **env);
 //exit.c
 void	free_tab(char **tab_str);
 void	ft_error_sms(char *str);
-void	ft_error(char *str);
+void	ft_error(int perm, char *str);
 void	ft_cleanup(t_pipex *pipex);
 
 #endif

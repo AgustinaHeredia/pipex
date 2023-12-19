@@ -6,7 +6,7 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:42:03 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/14 14:21:31 by agheredi         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:32:01 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**ft_parse_cmds(char **envp)
 	while (*envp != NULL)
 	{
 		if (ft_strncmp(*envp, "PATH=", 5) == 0)
-			str_path = (*envp) + 5;
+			str_path = ft_strdup(*envp + 5);
 		envp++;
 	}
 	all_path = ft_split(str_path, ':');
@@ -38,8 +38,8 @@ char	*get_path(t_pipex pipex, char **cmd)
 	i = 0;
 	while (pipex.all_path[i] != NULL)
 	{
-		path_part = ft_strjoin("/", pipex.all_path[i]);
-		exec = ft_strjoin(cmd[0], path_part);
+		path_part = ft_strjoin(pipex.all_path[i], "/");
+		exec = ft_strjoin(path_part, cmd[0]);
 		free(path_part);
 		if (access(exec, F_OK) == 0)
 		{
@@ -48,5 +48,19 @@ char	*get_path(t_pipex pipex, char **cmd)
 		free(exec);
 		i++;
 	}
-	return (cmd[0]);
+	return (NULL);
+}
+
+int	check_file_perimissions(char *fd_name)
+{
+	int	perm;
+
+	perm = 0;
+	if (access(fd_name, F_OK) < 0)
+		perm = NOFILE;
+	else if (access(fd_name, R_OK) < 0)
+		perm = NOREAD;
+	else if (access(fd_name, W_OK) < 0)
+		perm = NOWRITE;
+	return (perm);
 }

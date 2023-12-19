@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
+/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:07:18 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/19 00:07:12 by agusheredia      ###   ########.fr       */
+/*   Updated: 2023/12/19 15:29:00 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,28 @@ void	ft_error_sms(char *str)
 	exit(1);
 }
 
-void	ft_error(char *str)
+void	ft_error(int perm, char *str)
 {
-	perror(str);
-	exit(1);
+	if (perm == NOFILE || perm == NOREAD || perm == NOWRITE)
+	{
+		ft_putstr_fd("Pipex: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+	}
+	else if (perm == 404)
+	{
+		ft_putstr_fd("Pipex: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
 }
 
 void	ft_cleanup(t_pipex *pipex)
 {
 	close(pipex->infile);
 	close(pipex->outfile);
+	free(pipex->name1);
+	free(pipex->name2);
 	free_tab(pipex->all_path);
 	free_tab(pipex->cmd_1);
 	free_tab(pipex->cmd_2);
