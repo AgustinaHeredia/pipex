@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:07:18 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/19 15:29:00 by agheredi         ###   ########.fr       */
+/*   Updated: 2023/12/20 11:49:47 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_error_sms(char *str)
 
 void	ft_error(int perm, char *str)
 {
-	if (perm == NOFILE || perm == NOREAD || perm == NOWRITE)
+	if (perm == NOREAD || perm == NOWRITE)
 	{
 		ft_putstr_fd("Pipex: ", 2);
 		ft_putstr_fd(str, 2);
@@ -46,6 +46,7 @@ void	ft_error(int perm, char *str)
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 	}
+	exit(0);
 }
 
 void	ft_cleanup(t_pipex *pipex)

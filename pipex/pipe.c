@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:07:42 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/19 15:26:34 by agheredi         ###   ########.fr       */
+/*   Updated: 2023/12/20 16:37:26 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_child2(t_pipex pipex, int *p_fd, char **env)
 	dup2(pipex.outfile, 1);
 	close(pipex.outfile);
 	path = get_path(pipex, pipex.cmd_2);
-	execve(path, pipex.cmd_1, env);
+	execve(path, pipex.cmd_2, env);
 }
 
 void	ft_pipex(t_pipex pipex, char **env)
