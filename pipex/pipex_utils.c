@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:42:03 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/19 15:32:01 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:19:00 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	**ft_parse_cmds(char **envp)
 		envp++;
 	}
 	all_path = ft_split(str_path, ':');
+	free(str_path);
 	return (all_path);
 }
 

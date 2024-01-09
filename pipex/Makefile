@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+         #
+#    By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/06 14:39:27 by agheredi          #+#    #+#              #
-#    Updated: 2023/12/14 14:29:33 by agheredi         ###   ########.fr        #
+#    Updated: 2023/12/27 10:00:21 by agusheredia      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,17 @@ SRC = main.c \
 	exit.c \
 	pipe.c \
 
+SRCS_BONUS = pipex_bonus.c \
+
 CC = gcc
 LIBFT_PATH = libft/
 LIBFT_LIB = $(LIBFT_PATH)libft.a
 OBJ_DIR = obj
 OBJECTS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 HEADER = pipex.h
+OBJS_DIR_BONUS = obj_bonus
+OBJS_BONUS = $(addprefix $(OBJS_DIR_BONUS)/,$(SRCS_BONUS:.c=.o))
+HEADER_BONUS = pipex_bonus.h 
 
 all: subsystems $(NAME)
 
@@ -46,4 +51,10 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all re clean fclean subsystems
+bonus: .bonus
+
+.bonus : $(OBJS_BONUS) $(HEADER_BONUS)
+	ar -rcs $(NAME) $(OBJS_BONUS)
+	@touch .bonus
+
+.PHONY: all re clean fclean subsystems bonus
