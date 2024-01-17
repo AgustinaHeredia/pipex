@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+         #
+#    By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/06 14:39:27 by agheredi          #+#    #+#              #
-#    Updated: 2023/12/27 10:00:21 by agusheredia      ###   ########.fr        #
+#    Updated: 2024/01/09 11:29:09 by agheredi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = main.c \
 	exit.c \
 	pipe.c \
 
-SRCS_BONUS = pipex_bonus.c \
+SRCS_BONUS = bonus/pipex_bonus.c \
 
 CC = gcc
 LIBFT_PATH = libft/
@@ -27,7 +27,7 @@ OBJECTS = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 HEADER = pipex.h
 OBJS_DIR_BONUS = obj_bonus
 OBJS_BONUS = $(addprefix $(OBJS_DIR_BONUS)/,$(SRCS_BONUS:.c=.o))
-HEADER_BONUS = pipex_bonus.h 
+HEADER_BONUS = bonus/pipex_bonus.h 
 
 all: subsystems $(NAME)
 

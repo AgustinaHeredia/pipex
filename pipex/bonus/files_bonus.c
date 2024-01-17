@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   files_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 11:30:53 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/17 12:57:22 by agheredi         ###   ########.fr       */
+/*   Created: 2024/01/17 12:50:54 by agheredi          #+#    #+#             */
+/*   Updated: 2024/01/17 14:58:37 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	main(int argc, char **argv, char **envp)
+void	get_infile(char **argv, t_pipex *pipex)
 {
-	t_pipex	pipex;
-	int		i;
-
-	if (argc < check_argv(argv[1], &pipex))
-		ft_error_sms("invalid number of arguments\n");
-	get_infile(argv, &pipex);
-	get_outfile(argv[argc - 1], &pipex);
-	pipex.all_path = ft_parse_cmds(envp);
-	pipex.num_cmds = argc - 3;
-	i = 0;
-	while (i < pipex.num_cmds)
+	if (pipex->here_doc == 1)
 	{
-		ft_pipex_multi(pipex, argv, envp);
-		i++;
+		ft_here_doc(argv, &pipex);
 	}
-	ft_cleanup(&pipex);
-	exit(EXIT_SUCCESS);
+	else if (pipex->here_doc == 0)
+	{
+		pipex->name1 = ft_strdup(argv[1]);
+		pipex->infile = open(pipex->name1, O_RDONLY);
+	}
+}
+
+void	get_outfile(char *argv, t_pipex *pipex)
+{
+
 }

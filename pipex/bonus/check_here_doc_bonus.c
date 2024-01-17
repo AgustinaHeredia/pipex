@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   check_here_doc_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 11:30:53 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/17 12:57:22 by agheredi         ###   ########.fr       */
+/*   Created: 2024/01/17 12:38:03 by agheredi          #+#    #+#             */
+/*   Updated: 2024/01/17 15:19:18 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	main(int argc, char **argv, char **envp)
+int	check_argv(char *argv, t_pipex *pipex)
 {
-	t_pipex	pipex;
-	int		i;
-
-	if (argc < check_argv(argv[1], &pipex))
-		ft_error_sms("invalid number of arguments\n");
-	get_infile(argv, &pipex);
-	get_outfile(argv[argc - 1], &pipex);
-	pipex.all_path = ft_parse_cmds(envp);
-	pipex.num_cmds = argc - 3;
-	i = 0;
-	while (i < pipex.num_cmds)
+	if (ft_strncmp(argv, " here_doc", 9) == 0)
 	{
-		ft_pipex_multi(pipex, argv, envp);
-		i++;
+		pipex->here_doc = 1;
+		return (6);
 	}
-	ft_cleanup(&pipex);
-	exit(EXIT_SUCCESS);
+	else
+	{
+		pipex->here_doc = 0;
+		return (5);
+	}
+}
+
+void	ft_here_doc(char **argv, t_pipex *pipex)
+{
+	pipex->name1 = ".heredoc\0";
+	pipex->infile = open(pipex->name1, O_CREAT | O_RDWR | O_TRUNC, 0644);
 }

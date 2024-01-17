@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
+/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 12:39:21 by agusheredia       #+#    #+#             */
-/*   Updated: 2023/12/27 10:22:09 by agusheredia      ###   ########.fr       */
+/*   Created: 2024/01/09 11:31:38 by agheredi          #+#    #+#             */
+/*   Updated: 2024/01/17 13:05:45 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -30,6 +31,7 @@ typedef struct s_pipex
 {
 	pid_t	pid1;
 	pid_t	pid2;
+	int		num_cmds;
 	char	**cmds;
 	char	**all_path;
 	int		infile;
@@ -38,6 +40,12 @@ typedef struct s_pipex
 	char	*name2;
 	int		here_doc;
 }	t_pipex;
+
+//check_here_doc.c
+int		check_argv(char *argv, t_pipex *pipex);
+void	ft_here_doc(char **argv, t_pipex *pipex);
+
+//files_bonus.c 
 
 //pipex_utils.c
 char	**ft_parse_cmds(char **envp);

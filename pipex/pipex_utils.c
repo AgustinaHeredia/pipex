@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
+/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:42:03 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/09 11:19:00 by agusheredia      ###   ########.fr       */
+/*   Updated: 2024/01/17 12:14:52 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ char	*get_path(t_pipex pipex, char **cmd)
 		exec = ft_strjoin(path_part, cmd[0]);
 		free(path_part);
 		if (access(exec, F_OK) == 0)
-		{
 			return (exec);
-		}
 		free(exec);
 		i++;
 	}

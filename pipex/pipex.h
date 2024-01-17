@@ -6,7 +6,7 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:11:57 by agheredi          #+#    #+#             */
-/*   Updated: 2023/12/19 15:33:25 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:06:19 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define NOFILE 404
 # define NOREAD 403
 # define NOWRITE 402
+# define NOCMD 127
 
 typedef struct s_pipex
 {
