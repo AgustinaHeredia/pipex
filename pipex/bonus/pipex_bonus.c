@@ -6,7 +6,7 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:30:53 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/17 12:57:22 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:08:23 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	get_infile(argv, &pipex);
 	get_outfile(argv[argc - 1], &pipex);
 	pipex.all_path = ft_parse_cmds(envp);
-	pipex.num_cmds = argc - 3;
+	pipex.num_cmds = argc - (3 + pipex.here_doc);
 	i = 0;
 	while (i < pipex.num_cmds)
 	{
