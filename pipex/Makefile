@@ -6,7 +6,7 @@
 #    By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/06 14:39:27 by agheredi          #+#    #+#              #
-#    Updated: 2024/01/18 16:45:21 by agheredi         ###   ########.fr        #
+#    Updated: 2024/01/19 13:38:05 by agheredi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS_BONUS = bonus/pipex_bonus.c \
 			bonus/exit_bonus.c \
 			bonus/files_bonus.c \
 			bonus/pipex_utils_bonus.c \
-			childs_bonus.c \
+			bonus/childs_bonus.c \
 
 CC = gcc
 LIBFT_PATH = libft/

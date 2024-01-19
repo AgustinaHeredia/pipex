@@ -6,7 +6,7 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:31:38 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/19 12:26:15 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:59:53 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct s_pipex
 	pid_t	pid2;
 	int		num_cmds;
 	char	**all_path;
-	char	**cmd;
+	char	**cmd_1;
+	char	**cmd_2;
 	int		infile;
 	int		outfile;
 	int		here_doc;
@@ -54,8 +55,8 @@ char	*get_path(t_pipex pipex, char **cmd);
 int		check_file_perimissions(char *fd_name);
 
 //childs_bonus.c
-void	ft_child_1(t_pipex pipex, int *p_fd,char *argv, char **env);
-void	ft_child2(t_pipex pipex, int *p_fd, char **env);
+void	ft_child_1(t_pipex pipex, int *p_fd, char *argv, char **env);
+void	ft_child_2(t_pipex pipex, int *p_fd, char *cmd, char **env);
 
 //exit_bonus.c
 void	free_tab(char **tab_str);

@@ -6,7 +6,7 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:30:53 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/19 12:18:59 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/19 15:17:48 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	pipe_loop(int argc, t_pipex pipex, char **argv, char **envp)
 			ft_child1(p_fd, pipex, argv[i], envp);
 		i++;
 	}
-	ft_child2;
+	ft_child_2(pipex, p_fd, argv[argc - 1], envp);
 	close(p_fd[0]);
 	close(p_fd[1]);
 	waitpid(pipex.pid1, NULL, 0);

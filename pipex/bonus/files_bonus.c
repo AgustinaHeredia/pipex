@@ -6,7 +6,7 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:54 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/18 16:19:41 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/19 15:17:41 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 void	get_infile(char **argv, t_pipex *pipex)
 {
+	int		perm;
+
 	if (pipex->here_doc == 1)
 	{
 		ft_here_doc(argv[2], &pipex);
 		pipex->infile = open(".here_doc", O_RDONLY);
-		if (pipex->infile < 0)
-		{
-			unlink(".here_doc");
-			ft_error_sms("Error en here_doc\n");
-		}
+		perm = check_file_perimissions(".here_doc");
+		if (perm != 0)
+			ft_error(perm, ".here_doc");
 	}
 	else if (pipex->here_doc == 0)
 	{
 		pipex->infile = open(argv[1], O_RDONLY);
-		if (pipex->infile < 0)
-		{
-			ft_error(NOFILE, argv[1]);
-		}
+		perm = check_file_perimissions(argv[1]);
+		if (perm != 0)
+			ft_error(perm, argv[1]);
 	}
 }
 
