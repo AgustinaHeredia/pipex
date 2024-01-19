@@ -6,13 +6,13 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:43:35 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/18 17:01:15 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:27:27 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	ft_child1(t_pipex pipex, int *p_fd, char **env)
+void	ft_child_1(t_pipex pipex, int *p_fd,char *argv, char **env)
 {
 	char	*path;
 	int		perm;
@@ -48,20 +48,3 @@ void	ft_child2(t_pipex pipex, int *p_fd, char **env)
 	execve(path, pipex.cmd_2, env);
 }
 
-void	ft_pipex_multi(t_pipex pipex, char **argv, char **env)
-{
-	int		p_fd[2];
-
-	pipe(p_fd);
-	pipex.pid1 = fork();
-	if (pipex.pid1 == 0)
-	// hara este hijo la cantidad de veces de comandos menos el ultimo
-		ft_child1(pipex, p_fd, env);
-	pipex.pid2 = fork();
-	if (pipex.pid2 == 0)
-		ft_child2(pipex, p_fd, env);
-	close(p_fd[0]);
-	close(p_fd[1]);
-	waitpid(pipex.pid1, NULL, 0);
-	waitpid(pipex.pid2, NULL, 0);
-}

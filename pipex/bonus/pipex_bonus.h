@@ -6,7 +6,7 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:31:38 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/18 17:01:32 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:26:15 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int		check_argv(char *argv, t_pipex *pipex);
 void	ft_here_doc(char *argv, t_pipex *pipex);
 
 //files_bonus.c 
+void	get_infile(char **argv, t_pipex *pipex);
+void	get_outfile(char *argv, t_pipex *pipex);
 
 //pipex_utils_bonus.c
 char	**ft_parse_cmds(char **envp);
@@ -52,9 +54,8 @@ char	*get_path(t_pipex pipex, char **cmd);
 int		check_file_perimissions(char *fd_name);
 
 //childs_bonus.c
-void	ft_child1(t_pipex pipex, int *p_fd, char **env);
+void	ft_child_1(t_pipex pipex, int *p_fd,char *argv, char **env);
 void	ft_child2(t_pipex pipex, int *p_fd, char **env);
-void	ft_pipex_multi(t_pipex pipex, char **argv, char **env);
 
 //exit_bonus.c
 void	free_tab(char **tab_str);

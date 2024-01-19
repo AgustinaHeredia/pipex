@@ -6,13 +6,13 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:07:42 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/17 10:15:12 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:27:01 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_child1(t_pipex pipex, int *p_fd, char **env)
+void	ft_child1(int *p_fd,t_pipex pipex, char *cmd, char **env)
 {
 	char	*path;
 	int		perm;
@@ -24,7 +24,7 @@ void	ft_child1(t_pipex pipex, int *p_fd, char **env)
 	dup2(p_fd[1], 1);
 	dup2(pipex.infile, 0);
 	close(pipex.infile);
-	path = get_path(pipex, pipex.cmd_1);
+	path = get_path(pipex, cmd);
 	if (path == NULL)
 		ft_error(NOCMD, pipex.cmd_1[0]);
 	execve(path, pipex.cmd_1, env);
