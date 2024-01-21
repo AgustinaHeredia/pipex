@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:49:11 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/19 15:17:31 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:07:17 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,4 @@ void	ft_cleanup(t_pipex *pipex)
 	close(pipex->infile);
 	close(pipex->outfile);
 	free_tab(pipex->all_path);
-	free_tab(pipex->cmd_1);
-	free_tab(pipex->cmd_2);
 }

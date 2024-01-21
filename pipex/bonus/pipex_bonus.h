@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:31:38 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/19 12:59:53 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:19:25 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_pipex
 
 //check_here_doc_bonus.c
 int		check_argv(char *argv, t_pipex *pipex);
-void	ft_here_doc(char *argv, t_pipex *pipex);
+void	ft_here_doc(char *argv);
 
 //files_bonus.c 
 void	get_infile(char **argv, t_pipex *pipex);

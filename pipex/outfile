@@ -1,1 +1,14 @@
-      25
+      13     110     757
+total 144
+-rw-rw-r--@  1 agusheredia  staff   2526 20 ene 22:16 Makefile
+drwxrwxr-x@  9 agusheredia  staff    288 19 ene 15:25 bonus
+-rw-rw-r--@  1 agusheredia  staff   1791 19 ene 15:25 exit.c
+-rw-rw-r--@  1 agusheredia  staff   1973 19 ene 15:25 infile.txt
+drwxrwxr-x@ 65 agusheredia  staff   2080 21 ene 09:30 libft
+-rw-rw-r--@  1 agusheredia  staff   1411 19 ene 15:25 main.c
+drwxr-xr-x@  3 agusheredia  staff     96 21 ene 09:30 obj_bonus
+-rw-rw-r--@  1 agusheredia  staff     25 21 ene 09:25 outfile
+-rw-rw-r--@  1 agusheredia  staff   1894 19 ene 15:25 pipe.c
+-rwxr-xr-x@  1 agusheredia  staff  37832 21 ene 09:30 pipex
+-rw-rw-r--@  1 agusheredia  staff   1797 19 ene 15:25 pipex.h
+-rw-rw-r--@  1 agusheredia  staff   1833 19 ene 15:25 pipex_utils.c

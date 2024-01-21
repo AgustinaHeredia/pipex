@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:30:53 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/19 15:17:48 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/21 09:21:48 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	pipe_loop(int argc, t_pipex pipex, char **argv, char **envp)
 		if (pipex.pid1 < 0)
 			ft_error_sms("fork error\n");
 		if (pipex.pid1 == 0)
-			ft_child1(p_fd, pipex, argv[i], envp);
+			ft_child_1(pipex, p_fd, argv[i], envp);
 		i++;
 	}
-	ft_child_2(pipex, p_fd, argv[argc - 1], envp);
+	ft_child_2(pipex, p_fd, argv[argc - 2], envp);
 	close(p_fd[0]);
 	close(p_fd[1]);
 	waitpid(pipex.pid1, NULL, 0);
@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
-	if (argc <= check_argv(argv[1], &pipex))
+	if (argc < check_argv(argv[1], &pipex))
 		ft_error_sms("invalid number of arguments\n");
 	get_infile(argv, &pipex);
 	get_outfile(argv[argc - 1], &pipex);

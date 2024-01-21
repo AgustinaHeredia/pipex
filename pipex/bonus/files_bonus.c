@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:50:54 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/19 15:17:41 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/20 23:25:19 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ void	get_infile(char **argv, t_pipex *pipex)
 
 	if (pipex->here_doc == 1)
 	{
-		ft_here_doc(argv[2], &pipex);
+		ft_here_doc(argv[2]);
 		pipex->infile = open(".here_doc", O_RDONLY);
-		perm = check_file_perimissions(".here_doc");
-		if (perm != 0)
-			ft_error(perm, ".here_doc");
+		if (pipex->infile < 0)
+			ft_error(NOFILE, ".here_doc");
 	}
 	else if (pipex->here_doc == 0)
 	{
