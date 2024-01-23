@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
+/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:31:38 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/20 22:19:25 by agusheredia      ###   ########.fr       */
+/*   Updated: 2024/01/23 14:27:19 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
@@ -27,6 +26,9 @@
 # define NOREAD 403
 # define NOWRITE 402
 # define NOCMD 127
+
+# define READ_END 0
+# define WRITE_END 1
 
 typedef struct s_pipex
 {
@@ -57,6 +59,7 @@ int		check_file_perimissions(char *fd_name);
 //childs_bonus.c
 void	ft_child_1(t_pipex pipex, int *p_fd, char *argv, char **env);
 void	ft_child_2(t_pipex pipex, int *p_fd, char *cmd, char **env);
+void	otherchild(t_pipex pipex, int *p_fd, char *argv, char **env);
 
 //exit_bonus.c
 void	free_tab(char **tab_str);

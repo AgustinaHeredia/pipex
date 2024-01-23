@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
+/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:30:53 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/21 09:21:48 by agusheredia      ###   ########.fr       */
+/*   Updated: 2024/01/23 14:32:25 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,33 @@ void	pipe_loop(int argc, t_pipex pipex, char **argv, char **envp)
 	int	p_fd[2];
 	int	i;
 
-	i = 2;
-	if (pipex.here_doc)
-		i = 3;
-	while (i < argc -2)
+	i = 2 + pipex.here_doc;
+	while (i < argc - 1)
 	{
 		pipe(p_fd);
 		pipex.pid1 = fork();
 		if (pipex.pid1 < 0)
 			ft_error_sms("fork error\n");
 		if (pipex.pid1 == 0)
-			ft_child_1(pipex, p_fd, argv[i], envp);
+		{
+			if (i == (2 + pipex.here_doc))
+				ft_child_1(pipex, p_fd, argv[i], envp);
+			else
+				otherchild(pipex, p_fd, argv[i], envp);
+		}
+		close(p_fd[1]);
+		pipex.pid2 = fork();
+		if (pipex.pid2 < 0)
+			ft_error_sms("fork error\n");
+		if (pipex.pid2 == 0)
+		{
+			if (i == argc - 2)
+				ft_child_2(pipex, p_fd, argv[i], envp);
+		}
+		close(p_fd[0]);
 		i++;
 	}
-	ft_child_2(pipex, p_fd, argv[argc - 2], envp);
-	close(p_fd[0]);
-	close(p_fd[1]);
-	waitpid(pipex.pid1, NULL, 0);
-	waitpid(pipex.pid2, NULL, 0);
+	
 }
 
 int	main(int argc, char **argv, char **envp)

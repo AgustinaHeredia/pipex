@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
+/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 16:43:35 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/21 09:26:11 by agusheredia      ###   ########.fr       */
+/*   Updated: 2024/01/23 13:25:52 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_child_1(t_pipex pipex, int *p_fd, char *argv, char **env)
 	pipex.cmd_1 = ft_split(argv, ' ');
 	close(p_fd[0]);
 	dup2(p_fd[1], 1);
+	close(p_fd[1]);
 	dup2(pipex.infile, 0);
 	close(pipex.infile);
 	path = get_path(pipex, pipex.cmd_1);
@@ -46,3 +47,19 @@ void	ft_child_2(t_pipex pipex, int *p_fd, char *cmd, char **env)
 	free_tab(pipex.cmd_2);
 }
 
+void	otherchild(t_pipex pipex, int *p_fd, char *argv, char **env)
+{
+	char	*path;
+
+	pipex.cmd_1 = ft_split(argv, ' ');
+	dup2(p_fd[0], 0);
+	dup2(p_fd[1], 1);
+	close(p_fd[0]);
+	close(p_fd[1]);
+	path = get_path(pipex, pipex.cmd_1);
+	if (path == NULL)
+		ft_error(NOCMD, pipex.cmd_1[0]);
+	execve(path, pipex.cmd_1, env);
+	free(path);
+	free_tab(pipex.cmd_1);
+}

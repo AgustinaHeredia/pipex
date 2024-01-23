@@ -6,7 +6,7 @@
 /*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:07:42 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/19 13:07:00 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:38:34 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_child1(t_pipex pipex, int *p_fd, char **env)
 	dup2(pipex.infile, 0);
 	close(pipex.infile);
 	path = get_path(pipex, pipex.cmd_1);
+	if (path == NULL)
+		ft_error(NOCMD, pipex.cmd_1[0]);
 	execve(path, pipex.cmd_1, env);
 }
 
@@ -41,6 +43,8 @@ void	ft_child2(t_pipex pipex, int *p_fd, char **env)
 	dup2(pipex.outfile, 1);
 	close(pipex.outfile);
 	path = get_path(pipex, pipex.cmd_2);
+	if (path == NULL)
+		ft_error(NOCMD, pipex.cmd_2[0]);
 	execve(path, pipex.cmd_2, env);
 }
 

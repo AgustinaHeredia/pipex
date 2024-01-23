@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
+/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:50:02 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/20 23:22:18 by agusheredia      ###   ########.fr       */
+/*   Updated: 2024/01/23 10:54:40 by agheredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ int	check_file_perimissions(char *fd_name)
 		perm = NOREAD;
 	else if (access(fd_name, W_OK) < 0)
 		perm = NOWRITE;
-	printf("permition es %d\n", perm);
 	return (perm);
 }
