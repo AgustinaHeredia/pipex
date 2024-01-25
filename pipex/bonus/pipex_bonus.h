@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:31:38 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/23 14:27:19 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:25:12 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
@@ -27,21 +28,20 @@
 # define NOWRITE 402
 # define NOCMD 127
 
-# define READ_END 0
-# define WRITE_END 1
-
 typedef struct s_pipex
 {
-	pid_t	pid1;
-	pid_t	pid2;
+	pid_t	pid;
 	int		num_cmds;
+	int		idx;
+	int		**pipe;
 	char	**all_path;
-	char	**cmd_1;
-	char	**cmd_2;
+	char	**cmd;
 	int		infile;
 	int		outfile;
 	int		here_doc;
 }	t_pipex;
+
+void	ft_pipex(t_pipex *pipex, char **envp);
 
 //check_here_doc_bonus.c
 int		check_argv(char *argv, t_pipex *pipex);
@@ -53,13 +53,14 @@ void	get_outfile(char *argv, t_pipex *pipex);
 
 //pipex_utils_bonus.c
 char	**ft_parse_cmds(char **envp);
-char	*get_path(t_pipex pipex, char **cmd);
+char	*get_path(t_pipex *pipex, char **cmd);
 int		check_file_perimissions(char *fd_name);
+void	ft_get_cmd(t_pipex *pipex, char **argv, int argc);
+int		*creat_pipe(t_pipex *pipex);
 
 //childs_bonus.c
-void	ft_child_1(t_pipex pipex, int *p_fd, char *argv, char **env);
-void	ft_child_2(t_pipex pipex, int *p_fd, char *cmd, char **env);
-void	otherchild(t_pipex pipex, int *p_fd, char *argv, char **env);
+void	child(t_pipex *p, char **envp);
+void	close_pipes(t_pipex *pipex);
 
 //exit_bonus.c
 void	free_tab(char **tab_str);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+         #
+#    By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 10:23:30 by agheredi          #+#    #+#              #
-#    Updated: 2023/12/13 13:10:09 by agheredi         ###   ########.fr        #
+#    Updated: 2024/01/20 21:59:24 by agusheredia      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS) | $(OBJ_DIR)
 	@ar -rcs $(NAME) $(OBJS)
+	@echo -e "$(GREEN)$(NAME) created!$(DEFAULT)"
 	
 $(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
 	@$(CC) $(FLAGS) -c $< -o $@

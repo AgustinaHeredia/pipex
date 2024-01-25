@@ -3,47 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agheredi <agheredi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agusheredia <agusheredia@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:30:53 by agheredi          #+#    #+#             */
-/*   Updated: 2024/01/23 14:32:25 by agheredi         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:48:02 by agusheredia      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	pipe_loop(int argc, t_pipex pipex, char **argv, char **envp)
+void	ft_pipex(t_pipex *pipex, char **envp)
 {
-	int	p_fd[2];
+	int	status;
 	int	i;
 
-	i = 2 + pipex.here_doc;
-	while (i < argc - 1)
+	i = 0;
+	while (i < pipex->num_cmds - 1)
 	{
-		pipe(p_fd);
-		pipex.pid1 = fork();
-		if (pipex.pid1 < 0)
-			ft_error_sms("fork error\n");
-		if (pipex.pid1 == 0)
-		{
-			if (i == (2 + pipex.here_doc))
-				ft_child_1(pipex, p_fd, argv[i], envp);
-			else
-				otherchild(pipex, p_fd, argv[i], envp);
-		}
-		close(p_fd[1]);
-		pipex.pid2 = fork();
-		if (pipex.pid2 < 0)
-			ft_error_sms("fork error\n");
-		if (pipex.pid2 == 0)
-		{
-			if (i == argc - 2)
-				ft_child_2(pipex, p_fd, argv[i], envp);
-		}
-		close(p_fd[0]);
+		pipex->pipe[i] = malloc(sizeof(int) * 2);
+		if (!pipex->pipe[i])
+			ft_error_sms("Malloc\n");
+		pipe(pipex->pipe[i]);
 		i++;
 	}
-	
+	pipex->idx = 0;
+	while (pipex->idx < pipex->num_cmds)
+	{
+		child(pipex, envp);
+		pipex->idx++;
+	}
+	close_pipes(pipex);
+	waitpid(-1, &status, 0);
+	if (WEXITSTATUS(status) != 0)
+		exit(WEXITSTATUS(status));
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -55,7 +47,14 @@ int	main(int argc, char **argv, char **envp)
 	get_infile(argv, &pipex);
 	get_outfile(argv[argc - 1], &pipex);
 	pipex.all_path = ft_parse_cmds(envp);
-	pipe_loop(argc, pipex, argv, envp);
+	pipex.num_cmds = argc - (3 - pipex.here_doc);
+	pipex.pipe = malloc(sizeof(int *) * (pipex.num_cmds - 1));
+	if (!pipex.pipe)
+		ft_error_sms("Malloc\n");
+	ft_get_cmd(&pipex, argv, argc);
+	ft_pipex(&pipex, envp);
+	close_pipes(&pipex);
+	waitpid(-1, NULL, 0);
 	ft_cleanup(&pipex);
 	exit(EXIT_SUCCESS);
 }
